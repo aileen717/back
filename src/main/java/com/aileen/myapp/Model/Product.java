@@ -7,8 +7,9 @@ import jakarta.persistence.Id;
 @Entity
 public class Product {
 
-    private @Id
-    @GeneratedValue long id;
+    @Id
+    @GeneratedValue 
+    private long id;
     private String productName;
     private String description;
     private double price;

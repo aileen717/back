@@ -23,31 +23,26 @@ public class ProductController {
         this.repo = repo;
     }
 
-    //http://127.0.0.1:8080/products
-    //Get All Products
     @GetMapping("/products")
     public List<Product> getProducts(){
         return repo.findAll();
     }
 
-     //http;//127.0.0.1:8080/product/2
-    @GetMapping("/product/{id}")
+    @GetMapping("/products/{id}")
     public Product getProduct(@PathVariable Long id){
         return repo.findById(id)
         .orElseThrow(()-> new ProductNotFoundException(id));
     }
 
     //http://127.0.0.1:8080/product/new
-    @PostMapping("/product/new")
+    @PostMapping("/products/new")
     public String addProduct(@RequestBody Product newProduct){
         repo.save(newProduct);
         return "A new product is added.";
 
     }
 
-    //UPDATE END POINTS
-    //http://127.0.0.1:8080/product/edit/1
-    @PutMapping("/product/edit/{id}")
+    @PutMapping("/products/edit/{id}")
     public Product updateProduct(@PathVariable Long id,
     @RequestBody Product newProduct){
         return repo.findById(id)
@@ -61,9 +56,7 @@ public class ProductController {
         });
     }
 
-    //DELETE END POINTS
-    //http://127.0.0.1:8080/product/delete/1
-    @DeleteMapping("/product/delete/{id}")
+    @DeleteMapping("/products/delete/{id}")
     public String deleteProduct(@PathVariable Long id){
         repo.deleteById(id);
         return "A product is deleted.";

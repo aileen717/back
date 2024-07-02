@@ -34,7 +34,6 @@ public class ProductController {
         .orElseThrow(()-> new ProductNotFoundException(id));
     }
 
-    //http://127.0.0.1:8080/product/new
     @PostMapping("/products/new")
     public String addProduct(@RequestBody Product newProduct){
         repo.save(newProduct);

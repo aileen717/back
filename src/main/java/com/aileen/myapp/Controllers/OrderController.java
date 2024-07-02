@@ -22,20 +22,17 @@ public class OrderController {
         this.repo = repo;
     }
 
-    //http://127.0.0.1:8080/orders
     @GetMapping("/orders")
     public List<Order> getOrders(){
         return repo.findAll();
     }
 
-     //http;//127.0.0.1:8080/orders/2
     @GetMapping("/orders/{id}")
     public Order getOrder(@PathVariable Long id){
         return repo.findById(id)
         .orElseThrow(()-> new OrderNotFoundException(id));
     }
 
-    //http://127.0.0.1:8080/orders/new
     @PostMapping("/orders/new")
     public String addOrder(@RequestBody Order newOrder){
         repo.save(newOrder);
@@ -43,7 +40,6 @@ public class OrderController {
 
     }
 
-    //http://127.0.0.1:8080/orders/delete/1
     @DeleteMapping("/orders/delete/{id}")
     public String deleteOrder(@PathVariable Long id){
         repo.deleteById(id);

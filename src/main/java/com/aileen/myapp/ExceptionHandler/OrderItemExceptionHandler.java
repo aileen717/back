@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.aileen.myapp.NotFoundException.OrderNotFoundException;
+import com.aileen.myapp.NotFoundException.OrderItemNotFoundException;
 
 @RestControllerAdvice
 public class OrderItemExceptionHandler {
     
-    @ExceptionHandler(OrderNotFoundException.class)
+    @ExceptionHandler(OrderItemNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String productNotFoundHandler(OrderNotFoundException e){
+    String orderItemNotFoundHandler(OrderItemNotFoundException e){
         return e.getMessage();
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aileen.myapp.Model.Product;
@@ -15,6 +16,7 @@ import com.aileen.myapp.NotFoundException.ProductNotFoundException;
 import com.aileen.myapp.Repository.ProductRepository;
 
 @RestController
+@RequestMapping("/api/v1/product")
 public class ProductController {
 
     ProductRepository repo;
@@ -23,25 +25,25 @@ public class ProductController {
         this.repo = repo;
     }
 
-    @GetMapping("/products")
+    @GetMapping("/all")
     public List<Product> getProducts(){
         return repo.findAll();
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
     public Product getProduct(@PathVariable Long id){
         return repo.findById(id)
         .orElseThrow(()-> new ProductNotFoundException(id));
     }
 
-    @PostMapping("/products/new")
+    @PostMapping("/new")
     public String addProduct(@RequestBody Product newProduct){
         repo.save(newProduct);
         return "A new product is added.";
 
     }
 
-    @PutMapping("/products/edit/{id}")
+    @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id,
     @RequestBody Product newProduct){
         return repo.findById(id)
@@ -55,7 +57,7 @@ public class ProductController {
         });
     }
 
-    @DeleteMapping("/products/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id){
         repo.deleteById(id);
         return "A product is deleted.";
